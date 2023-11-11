@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Main {
     public static int bossHealth = 700;
-    public static int bossDamage = 30;
+    public static int bossDamage = 40;
     public static String bossDefence;
     public static int[] heroesHealth = {280, 270, 250, 350};
     public static int[] heroesDamage = {10, 15, 20, 0};
@@ -33,12 +33,21 @@ public class Main {
     }
     public static void medicCure(){
         Random random = new Random();
-        int randHero = random.nextInt(2 - 0 + 1);
-        int randHP = random.nextInt(10)+10;
+
+
+        boolean checkMedic = false;
+
+        if (heroesHealth[3]> 0){
+            checkMedic= true;
+        }
+
+
         for (int i = 0; i < heroesHealth.length-1; i++) {
-            if (heroesHealth[i] > 0 && heroesHealth[i] < 100){
-                heroesHealth[randHero] += randHP;
-                System.out.println("The medic cured: " + heroesAttackType[randHero]+ " for "+ randHP+" HP!");
+            if (heroesHealth[i] > 0 && heroesHealth[i] < 100 && checkMedic){
+                int hp = random.nextInt(20)+10;
+
+                heroesHealth[i]+=hp;
+                System.out.println("The medic cured: " + heroesAttackType[i]+ " for "+ hp+" HP!");
                 break;
             }
         }
